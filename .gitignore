@@ -1,5 +1,5 @@
 # MacOS generated file
-.DS_Store
+*.DS_Store
 
 # Created by https://www.toptal.com/developers/gitignore/api/go,vim,goland
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,vim,goland

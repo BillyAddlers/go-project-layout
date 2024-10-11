@@ -1,0 +1,23 @@
+# NOTE: Welcome to the docker-compose.yml!
+#
+# This file defines how your services interact and run together. It's the blueprint for multi-container Docker applications.
+# Here, you specify each service, its build context, environment variables, volumes, and more.
+# This file simplifies complex setups by allowing you to define everything in one place.
+#
+# Feel free to tweak and modify this configuration as your project grows or your requirements change.
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./build/Dockerfile
+      args:
+        APP_NAME: example
+    environment:
+      - DEBUG=false
+    volumes:
+      - .:/app
+    # ports:
+    #   - "8080:8080"
+    restart: no
+# You can add more services here if needed.

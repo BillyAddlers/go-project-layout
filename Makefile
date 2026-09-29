@@ -42,8 +42,8 @@ audit: test
 	go mod verify
 	test -z "$(shell gofmt -l .)"
 	go vet ./...
-	go run honnef.co/go/tools/cmd/staticcheck@latest -checks=all,-ST1000,-U1000 ./...
-	go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+	go run honnef.co/go/tools/cmd/staticcheck@v0.8.1 -checks=all,-ST1000,-U1000 ./...
+	go run golang.org/x/vuln/cmd/govulncheck@v1.8.0 ./...
 
 ## test: run all tests
 .PHONY: test
@@ -85,8 +85,8 @@ run: build
 ## run/live: run the application with reloading on file changes
 .PHONY: run/live
 run/live:
-	go run github.com/cosmtrek/air@v1.43.0 \
-		--build.cmd "make build" --build.bin "/tmp/bin/${binary_name}" --build.delay "100" \
+	go run github.com/air-verse/air@v1.67.4 \
+		--build.cmd "make build" --build.entrypoint "/tmp/bin/${binary_name}" --build.delay "100" \
 		--build.exclude_dir "" \
 		--build.include_ext "go, tpl, tmpl, html, css, scss, js, ts, sql, jpeg, jpg, gif, png, bmp, svg, webp, ico" \
 		--misc.clean_on_exit "true"

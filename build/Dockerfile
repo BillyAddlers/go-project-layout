@@ -16,7 +16,7 @@ ARG APP_NAME=example
 #
 # Change your base image version according to the one used in `go.mod`
 # to prevent breaking changes between go versions.
-FROM golang:1.23-alpine AS builder
+FROM golang:1.27-alpine AS builder
 
 # Install basic packages used on our Makefile Build Tools.
 RUN apk add --no-cache make git upx
@@ -43,7 +43,7 @@ RUN make build
 # therefore reduce final Image size.
 
 # NOTE: STAGE 2: Use a minimal base image to run the application.
-FROM alpine:latest
+FROM alpine:3.24
 
 # WARN: Uses declarative variables for better project visibility.
 ENV WORK_DIR=/root

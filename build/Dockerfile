@@ -52,7 +52,10 @@ ARG APP_NAME
 WORKDIR ${WORK_DIR}
 
 # Copy the built binary from STAGE 1: builder.
-COPY --from=builder /tmp/bin/${APP_NAME} .
+# NOTE: Renamed to `./app` so the exec-form ENTRYPOINT below stays a fixed path.
+# Exec-form ENTRYPOINT does not expand environment variables, so `APP_NAME` is
+# resolved here at copy time instead.
+COPY --from=builder /tmp/bin/${APP_NAME} ./app
 
 # WARN: If your application is listening to a port, uncomment line below to give container
 # access to the port
@@ -60,7 +63,7 @@ COPY --from=builder /tmp/bin/${APP_NAME} .
 # EXPOSE 8080
 
 # Run the application.
-ENTRYPOINT [ "./example" ]
+ENTRYPOINT [ "./app" ]
 
 # You can use the line below to provide parameter into your application.
 # CMD ["--debug"]
